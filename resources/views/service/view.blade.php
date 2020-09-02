@@ -1,3 +1,4 @@
+<?php use Carbon\Carbon; ?>
 @extends('layouts.adminLayout')
 
     @section('content')
@@ -27,12 +28,14 @@
                                 <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Status</th>
                                     <th class="text-center">View</th>
                                     <th class="text-center">Edit</th>
                                     <th class="text-center">Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if($services->count()>0)
                                 @foreach($services as $service)
                                 <tr>
                                     <td>
@@ -51,20 +54,35 @@
                                         </div>
                                     </td>
 
+                                
+                                    <td class="">
+                                        @if($service->date > Carbon::now())
+                                            <div class="badge badge-success">Pending</div>
+                                        @else
+                                            <div class="badge badge-warning">overdue</div>
+                                        @endif
+                                    </td>
+                                
+
                                     <td class="text-center">
                                         <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm"><a href="{{ route('service-show', ['id' => $service->id]) }}">View</a></button>
                                     </td>
 
                                     
                                     <td class="text-center">
-                                        <button type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm">Edit</button>
+                                        <button type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm"><a href="{{ route('service-edit', ['id' => $service->id]) }}">Edit<a></button>
                                     </td>
 
                                     <td class="text-center">
-                                        <button type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm">Delete</button>
+                                        <button type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm"><a href="{{ route('service-destroy', ['id' => $service->id]) }}">Delete</a></button>
                                     </td>
                                 </tr>
                                 @endforeach
+                                @else
+                                <tr>
+                                    <td> no services created </td>
+                                </tr>
+                                @endif
                                 </tbody>
                             </table>
                         </div>

@@ -32,6 +32,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if($ages->count()>0)
                                 @foreach($ages as $age)
                                 <tr>
                                     <td>
@@ -53,6 +54,11 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                @else
+                                    <tr>
+                                        <td>no age groups</td>
+                                    </tr>
+                                @endif
                                 </tbody>
                             </table>
                         </div>

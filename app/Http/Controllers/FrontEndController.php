@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Service;
 use App\Member;
 
+
 class FrontEndController extends Controller
 {
     public function index(){
@@ -14,11 +15,14 @@ class FrontEndController extends Controller
         $members_count=Member::all()->count();
         $female_count=Member::all()->where('gender',1)->count();
         $male_count=Member::all()->where('gender',0)->count();
+        $services=Service::orderBy('created_at','DESC')->get();
+        
 
         return view('welcome')
         ->with('services_count', $services_count)
         ->with('members_count', $members_count)
         ->with('female_count',$female_count)
-        ->with('male_count', $male_count);
+        ->with('male_count', $male_count)
+        ->with('services', $services);
     }
 }

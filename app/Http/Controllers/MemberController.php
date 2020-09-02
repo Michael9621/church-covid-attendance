@@ -27,7 +27,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return view('home')->with('services', Service::all())->with('ages', Age::all());
+        return view('home1')->with('services', Service::all())->with('ages', Age::all());
     }
 
     /**

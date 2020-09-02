@@ -1,3 +1,4 @@
+<?php use Carbon\Carbon; ?>
 @extends('layouts.adminLayout')
 
     @section('content')
@@ -19,7 +20,13 @@
                         Sunday
                         @endif
                             <div class="page-title-subheading">{{ $service->date }}
-                            </div>
+                                @if($service->date > Carbon::now())
+                                    <div class="badge badge-success">Pending</div>
+                                @else
+                                    <div class="badge badge-warning">overdue</div>
+                                @endif
+                            </div>      
+                           
                         </div>
                     </div>
                     <div class="page-title-actions">
@@ -66,10 +73,10 @@
                             <div class="widget-content-wrapper">
                                 <div class="widget-content-left">
                                     <div class="widget-heading">Total Age groups</div>
-                                    <div class="widget-subheading">People Interested</div>
+                                    <div class="widget-subheading">age groups</div>
                                 </div>
                                 <div class="widget-content-right">
-                                    <div class="widget-numbers text-danger">4</div>
+                                    <div class="widget-numbers text-danger">{{$count_ages}}</div>
                                 </div>
                             </div>
                         </div>
@@ -78,34 +85,12 @@
             </div>          
 
             <div class="row">
-                <div class="col-md-12 col-lg-12">
-                    <div class="card-shadow-danger mb-3 widget-chart widget-chart2 text-left card">
-                        <div class="widget-content">
-                            <div class="widget-content-outer">
-                                <div class="widget-content-wrapper">
-                                    <div class="widget-content-left pr-2 fsize-1">
-                                        <div class="widget-numbers mt-0 fsize-3 text-danger">71%</div>
-                                    </div>
-                                    <div class="widget-content-right w-100">
-                                        <div class="progress-bar-xs progress">
-                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="81" aria-valuemin="0" aria-valuemax="100" style="width: 81%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="widget-content-left fsize-1">
-                                    <div class="text-muted opacity-6">Current service attendance</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-     
-            <div class="row">
                 <div class="col-md-12">
                     <div class="main-card mb-3 card">
-                        <div class="card-header">Active Users
+                        <div class="card-header">Registered
                         </div>
+                        
+
                         <div class="table-responsive">
                             <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                                 <thead>
@@ -118,6 +103,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if($members2)
                                 @foreach($members2 as $member)
                                 <tr>
                                     
@@ -133,20 +119,31 @@
                                     <td class="text-center">{{$member->identification}}</td>
                                     <td class="text-center">{{$member->phone}}</td>
                                     <td class="text-center">{{$member->age}}</td>
-                                    <th class="text-center">{{ $member->gender ==0 ? "M" : "F"}}</th>
+                                    <th class="text-center">{{ $member->gender ==0 ? "M" : "F"}}
+                                    </th>
                                 </tr>
                                 @endforeach
+
+                                @else
+                                    <tr>
+                                        <td>no members have registered for this service</td>
+                                    </tr>
+
+                                @endif
             
                                 </tbody>
                             </table>
                         </div>
                         <div class="d-block text-center card-footer">
-                            <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger"><i class="pe-7s-trash btn-icon-wrapper"> </i></button>
-                            <button class="btn-wide btn btn-success">Save</button>
+                            <button class="btn-wide btn btn-success"><a href="{{route('service-excel', ['id'=>$service->id])}}">convert execel</a></button>
+                            {{ $members2->links() }}
                         </div>
                     </div>
                 </div>
             </div>
+
+           
+
 
         </div>
 

@@ -22,6 +22,16 @@
     -->
 <link href="{{ asset('./assets/main.css') }}" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('./assets/datepicker/tempusdominus-bootstrap-4.css') }}" />
+<style>
+    a{
+        text-decoration:none;
+        color:white;
+    }
+    a:hover{
+        text-decoration:none;
+        color:yellow;
+    }
+</style>
 
 </head>
 <body>
@@ -74,18 +84,18 @@
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <button type="button" tabindex="0" class="dropdown-item">User Account</button>
-                                            <button type="button" tabindex="0" class="dropdown-item">Settings</button>
-                                            <h6 tabindex="-1" class="dropdown-header">Header</h6>
-                                            <button type="button" tabindex="0" class="dropdown-item">Actions</button>
-                                            <div tabindex="-1" class="dropdown-divider"></div>
-                                            <button type="button" tabindex="0" class="dropdown-item">Dividers</button>
+                                            <button type="button" tabindex="0" class="dropdown-item"><a style="color:black;" href="{{route('logout')}}" onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">logout</a>
+                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                    @csrf
+                                                </form>     
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                        Frank
+                                        {{Auth::user()->name}}
                                     </div>
                                     <div class="widget-subheading">
                                         Admin

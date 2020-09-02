@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
 use Carbon\Carbon;
 use App\Service;
+use App\Age;
 use Session;
+use App\Exports\ServicesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class ServiceController extends Controller
@@ -64,13 +67,16 @@ class ServiceController extends Controller
         $members=$service->members()->count();
         $female=$service->members()->where('gender',1)->count();
         $male=$service->members()->where('gender',0)->count();
+        $count_ages= Age::all()->count();
+        //$members3=$service->members()->selectRaw('identification, COUNT(*) as count')->groupBy('identification')->orderBy('count', 'desc')->get();
         
-        $members2=$service->members()->get();
+        $members2=$service->members()->paginate(10);
         return view('service.single')->with('service', $service)
         ->with('members', $members)
         ->with('members2', $members2)
         ->with('female',$female)
         ->with('male',$male)
+        ->with('count_ages',$count_ages)
         ;
     }
 
@@ -82,7 +88,8 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $service=Service::find($id);
+        return view('service.edit')->with('service',$service);
     }
 
     /**
@@ -94,7 +101,17 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $service=Service::find($id);
+        $service->duration = $request->duration;
+        $service->attendants = $request->attendants;
+        $service->day = $request->day;
+        $service->service=$request->service;
+        $service->date=$service->date;
+        $service->save();
+
+        Session::flash('success', 'updated a service successfully');
+
+        return redirect()->route('service-view');
     }
 
     /**
@@ -106,5 +123,14 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function export($id){
+
+        $service=Service::find($id);
+        
+
+        return Excel::download(new ServicesExport($id), 'sevice'. $service->date.'.xlsx');
+        
     }
 }
