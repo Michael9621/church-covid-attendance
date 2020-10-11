@@ -27,21 +27,12 @@
                                 
                                 <div class="position-relative form-group"><label for="exampleAddress" class="">Duration</label><input name="duration" id="exampleAddress" placeholder="Duration of the service" type="text" class="form-control"></div>
                                 <div class="position-relative form-group"><label for="exampleAddress" class="">Number of attendants allowed</label><input name="attendants" id="exampleAddress" placeholder="Maximum number of attendants" type="text" class="form-control"></div>                                 
-                                @if($type->type==0)
                                 <div class="position-relative form-group"><label for="exampleSelect" class="">Choose day</label><select name="day" id="exampleSelect" class="form-control">
                                         <option value="1">Tuesday</option>
                                         <option value="2">Thursday</option>
                                         <option value="3">Sunday</option>
                                     </select>
                                 </div>
-                                @else
-                                <div class="position-relative form-group"><label for="exampleSelect" class="">Choose day</label><select name="day" id="exampleSelect" class="form-control">
-                                        <option value="1">Tuesdacssdsny</option>
-                                        <option value="2">Thursday</option>
-                                        <option value="3">Sunday</option>
-                                    </select>
-                                </div>
-                                @endif
                                 <div class="position-relative form-group"><label for="exampleSelect" class="">Type of service</label><select name="service" id="exampleSelect" class="form-control">
                                         <option value="0">1st service</option>
                                         <option value="1">2nd service</option>

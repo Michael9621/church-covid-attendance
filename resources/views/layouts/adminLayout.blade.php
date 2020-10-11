@@ -189,6 +189,7 @@
                                         </li>
                                     </ul>
                                 </li>
+                               
                                 <li
                                     
                                     
@@ -234,8 +235,51 @@
                                             </a>
                                         </li>
 
+                                        
+
                                     </ul>
                                 </li>
+
+                                <li
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    >
+                                        <a href="#">
+                                            <i class="metismenu-icon pe-7s-diamond"></i>
+                                                type
+                                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                        </a>
+                                        <ul
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                        >
+                                
+                                            <li>
+                                                <a href="{{ route('type-view') }}">
+                                                    <i class="metismenu-icon">
+                                                    </i>View type groups
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('type-create') }}">
+                                                    <i class="metismenu-icon">
+                                                    </i>Create type groups
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
                             </ul>
                         </div>
                     </div>

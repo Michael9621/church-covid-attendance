@@ -2,19 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
 Route::get('/successfully-registered', 'MemberController@index')->name('registered');
 Route::get('/', 'MemberController@create')->name('member-create');
 
@@ -29,6 +16,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/service-excel/{id}', 'ServiceController@export')->name('service-excel');
 
+    Route::get('/type-view', 'TypeController@index')->name('type-view');
+    Route::get('type-create', 'TypeController@create')->name('type-create');
+    Route::post('/type-store', 'TypeController@store')->name('type-store');
+    Route::get('/type-edit/{id}', 'TypeController@edit')->name('type-edit');
+    Route::post('/type-update/{id}','TypeController@update')->name('type-update');
+    Route::get('/type-destroy/{id}', 'TypeController@destroy')->name('type-destroy');
 
     Route::get('/age-view', 'AgeController@index')->name('age-view');
     Route::get('/age-create', 'AgeController@create')->name('age-create');

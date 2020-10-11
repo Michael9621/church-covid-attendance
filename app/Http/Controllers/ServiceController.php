@@ -10,6 +10,7 @@ use App\Age;
 use Session;
 use App\Exports\ServicesExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Type;
 
 
 class ServiceController extends Controller
@@ -31,7 +32,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('service.create');
+        $type=Type::all()->first();
+        return view('service.create')->with('type',$type);
     }
 
     /**
