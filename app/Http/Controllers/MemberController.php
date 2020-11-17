@@ -7,6 +7,7 @@ use App\Service;
 use App\Age;
 use App\Member;
 use Session;
+use Carbon\Carbon;
 
 class MemberController extends Controller
 {
@@ -27,6 +28,7 @@ class MemberController extends Controller
      */
     public function create()
     {
+        
         return view('home1')->with('services', Service::all())->with('ages', Age::all());
     }
 

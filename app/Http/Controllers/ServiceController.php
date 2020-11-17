@@ -103,6 +103,8 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        
         $service=Service::find($id);
         $service->duration = $request->duration;
         $service->attendants = $request->attendants;
